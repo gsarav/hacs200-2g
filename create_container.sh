@@ -62,7 +62,7 @@ fi
   external_ip=$($ip_addr) # External IP address that will route to the new container
 
 # ========= CONFIGURE THE HONEYPOT =======
-# Example: ./populate.sh "$container_type"
+# Example: ./populate.sh "$container_name"
 # 1. Copy files from VM to container depending on container type
 # 2. Poison commands >> wget, curl, exit, logout 
 # 3. Install up ssh on container
