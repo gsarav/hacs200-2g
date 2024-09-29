@@ -15,7 +15,7 @@ container_ip=$(sudo lxc-info -n "$1" | grep "IP" | xargs | cut -d" " -f2)
 external_ip=$2
 
 # ==== DELETE MITM PREROUTING AND NAT RULES ====
-sudo iptables --table nat --delete PREROUTINF --source 0.0.0.0/0 --destination "$external_ip" --protocol tcp --dport 22 --jump DNAT --to-destination "$container_ip"
+sudo iptables --table nat --delete PREROUTING --source 0.0.0.0/0 --destination "$external_ip" --protocol tcp --dport 22 --jump DNAT --to-destination "$container_ip"
 sudo iptables --table nat --delete POSTROUTING --source "$container_ip" --destination 0.0.0.0/0 --jump SNAT --to-source "$external_ip"
 # delete MITM PREROUTING rule
 #
