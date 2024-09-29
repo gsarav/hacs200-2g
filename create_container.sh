@@ -30,19 +30,19 @@ do
 
   if [[ "$random_number" -eq 1 ]]
   then
-    container_name="banner-session" # banner with session files
+    container_name="banner-session-" # banner with session files
 
   elif [[ "$random_number" -eq 2 ]]
   then
-    container_name="banner-nosession" # banner with no session files
+    container_name="banner-nosession-" # banner with no session files
 
   elif [[ "$random_number" -eq 3 ]]
   then
-    container_name="nobanner-session" # no banner with session files
+    container_name="nobanner-session-" # no banner with session files
 
   elif [[ "$random_number" -eq 4 ]]
   then
-    container_name="nobanner-nosession" # empty container
+    container_name="nobanner-nosession-" # empty container
 
 fi
 
