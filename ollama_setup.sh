@@ -64,7 +64,7 @@ REMOTE_USER="UMDadmin"
 
 # Transfer /usr/share/ollama directory
 echo "Transferring /usr/local/bin/ollama to ${REMOTE_USER}@${REMOTE_IP}:${DESTINATION_PATH}..."
-sudo sshpass -p "$USER_PASSWORD" scp -o StrictHostKeyChecking=no -r /usr/share/ollama ${REMOTE_USER}@${REMOTE_IP}:~/AIfiles
+sudo sshpass -p "$USER_PASSWORD" scp -o StrictHostKeyChecking=no -r /usr/share/ollama/.ollama ${REMOTE_USER}@${REMOTE_IP}:~/AIfiles
 
 # Transfer /usr/share/ollama/.ollama directory
 echo "Transferring /usr/share/ollama/.ollama to ${REMOTE_USER}@${REMOTE_IP}:${DESTINATION_PATH}..."
@@ -73,7 +73,7 @@ sudo sshpass -p "$USER_PASSWORD" scp -o StrictHostKeyChecking=no -r "/usr/local/
 sudo lxc-attach -n "$CONTAINER_NAME" -- bash -c "mv /home/UMDadmin/ollama /usr/local/bin/ollama"
 
 #Replace this line with a model file download
-sudo lxc-attach -n "$CONTAINER_NAME" -- bash -c "mv /home/UMDadmin/AIfiles /usr/share/ollama"
+sudo lxc-attach -n "$CONTAINER_NAME" -- bash -c "mv /home/UMDadmin/AIfiles /root/.ollama"
 
 echo "File transfer completed."
 
