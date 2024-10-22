@@ -20,6 +20,8 @@ fi
 # Checking how many IP addresses are free- for each IP address that is free, we will create a new container.
 readarray -t free_ip_addrs < free_ip_addr.txt
 
+HoldRand=""
+
 for ip_addr in "${free_ip_addrs[@]}"; # Going through each free IP address in our file
 do
 
@@ -30,19 +32,20 @@ do
 
   if [[ "$random_number" -eq 1 ]]
   then
-    container_name="banner-session-" # banner with session files
+    container_name="banner-help-" # banner with session files
 
   elif [[ "$random_number" -eq 2 ]]
   then
-    container_name="banner-nosession-" # banner with no session files
+    container_name="nobanner-help-" # banner with no session files
 
   elif [[ "$random_number" -eq 3 ]]
   then
-    container_name="nobanner-session-" # no banner with session files
+    container_name="banner-nohelp-" # no banner with session files
 
   elif [[ "$random_number" -eq 4 ]]
   then
-    container_name="nobanner-nosession-" # empty container
+    container_name="nobanner-nohelp-" # empty container
+  HoldRand=random_number
 
 fi
 
@@ -54,7 +57,9 @@ fi
    sudo lxc-create -n "$container_name" -t download -- -d ubuntu -r focal -a amd64
 # Wait 15 seconds for the container to start
   sleep 15
-
+  #give config
+  ~/configuration/THECONFIGHELPER "$HoldRand" container_name
+  
   sudo lxc-start -n "$container_name" # Start the container
   sleep 2 # Wait two seconds to start the container
 
