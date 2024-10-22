@@ -21,7 +21,6 @@ echo -e "${white}==============================================================$
 
 echo -e "${white}*${reset} ${green}This chatbot is designed to assist you with queries related to academic services, general campus information, and more.${reset}"
 echo -e "${white}*${reset} ${green}Feel free to ask questions, explore resources, or get personalized help from the comfort of your device.${reset}"
-echo -e "${white}*${reset} ${green}For information on how to use a chatbot, refer to the HELP file.${reset}"
 echo -e "${white}*${reset} ${green}Our chatbot is here to provide fast, 24/7 support.${reset}"
 echo -e "${white}==============================================================${reset}"
 
