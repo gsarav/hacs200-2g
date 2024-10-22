@@ -26,3 +26,4 @@ echo -e "${white}*${reset} ${green}Our chatbot is here to provide fast, 24/7 sup
 echo -e "${white}==============================================================${reset}"
 
 echo -e "${red}ALERT: ${white}Chatbot active and ready to assist.${reset}"
+echo -e "${red}ALERT: ${white}Use Chatbot by running the command 'ollama run qwen:0.5b-chat-v1.5-q2_K'${reset}"
