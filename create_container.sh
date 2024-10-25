@@ -3,7 +3,7 @@
 # Steps for Creating a Container
 # 1. Creating container (or in the future restoring a snapshot) and configuring it
 #   a. Creating honey for type of configuration
-#   b. Installing open-ssh on the container 
+#   b. Installing open-ssh on the container
 
 # 2. Creating NAT
 # 3. Setting up firewall
@@ -71,41 +71,43 @@ do
 # 2. Poison commands >> wget, curl, exit, logout
 # 3. Install open ssh on container
 #
-  sudo lxc-attach -n "$container_name" -- bash -c "sudo apt-get update && sudo apt-get install openssh-server -y" 
+  sudo lxc-attach -n "$container_name" -- bash -c "sudo apt-get update && sudo apt-get install openssh-server -y"
   sudo lxc-attach -n "$container_name" -- bash -c "sudo apt-get install -y curl"
-  #sudo lxc-attach -n "$container_name" -- bash -c "curl -fsSl https://ollama.com/install.sh | sh" 
-  #sudo lxc-attach -n "$container_name" -- bash -c "ollama pull qwen:0.5b-chat-v1.5-q2_K"
+  sudo lxc-attach -n "$container_name" -- bash -c "curl -fsSl https://ollama.com/install.sh | sh"
+  sudo lxc-attach -n "$container_name" -- bash -c "ollama pull qwen:0.5b-chat-v1.5-q2_K"
+  sudo lxc-attach -n "$container_name" -- bash -c "sudo systemctl stop ollama.service"
 
-  #if [[ "$random_number" -eq 1 ]]
-  #then
-  #  ./NEWCONFIGMANAGER 1 $container_name
-  #elif [[ "$random_number" -eq 2 ]]
-  #then
-  #  ./NEWCONFIGMANAGER 2 $container_name
-  #elif [[ "$random_number" -eq 3 ]]
-  #then
-  #   ./NEWCONFIGMANAGER 3 $container_name
-  # elif [[ "$random_number" -eq 4 ]]
-  # then
-  #   ./NEWCONFIGMANAGER 4 $container_name
-  #fi
+
+  if [[ "$random_number" -eq 1 ]]
+  then
+    ./NEWCONFIGMANAGER 1 $container_name
+  elif [[ "$random_number" -eq 2 ]]
+  then
+    ./NEWCONFIGMANAGER 2 $container_name
+  elif [[ "$random_number" -eq 3 ]]
+  then
+     ./NEWCONFIGMANAGER 3 $container_name
+   elif [[ "$random_number" -eq 4 ]]
+   then
+     ./NEWCONFIGMANAGER 4 $container_name
+  fi
 
   echo "NEWCONFIGMANAGER run"
 
-  #sudo lxc-attach -n "$container_name" -- bash -c "sudo apt-get update && sudo apt-get install openssh-server -y" 
+  #sudo lxc-attach -n "$container_name" -- bash -c "sudo apt-get update && sudo apt-get install openssh-server -y"
 
 # ==== SETTING UP NAT RULES ====
   sudo ip addr add "$external_ip"/24 brd + dev eth3
   # sudo ip link set dev eth3 up
   sudo iptables --table nat --insert PREROUTING --source 0.0.0.0/0 --destination "$external_ip" --jump DNAT --to-destination "$container_ip"
   sudo iptables --table nat --insert POSTROUTING --source "$container_ip" --destination 0.0.0.0/0 --jump SNAT --to-source "$external_ip"
-  echo "NAT setup" 
+  echo "NAT setup"
 
 # ==== SETTING UP MITM ====
   MITM_port=$id # using port equal to the container id
   sudo iptables --table nat --insert PREROUTING --source 0.0.0.0/0 --destination "$external_ip" --protocol tcp --dport 22 --jump DNAT --to-destination 10.0.3.1:"$MITM_port"
   sudo sysctl -w net.ipv4.conf.all.route_localnet=1
-  
+
   echo "MITM setup"
 
   # sudo npm install -g forever
@@ -131,8 +133,7 @@ do
 #
 #
 # ==== MONITORING TO CHECK FOR SSH CONNECTION  ====
-   ./monitor.sh "$container_name" "$external_ip" & 
-   echo $!
+   ./monitor.sh "$container_name" "$external_ip" &
    monitor_pid=$!
    echo "$monitor_pid" > "./monitoring_${id}"
 
