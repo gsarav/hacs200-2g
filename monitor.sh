@@ -101,4 +101,4 @@ sudo iptables --delete INPUT -s "$attacker_ip" -d 10.0.3.1 -p tcp --dport "$MITM
 rm /home/student/"$container_name"_start_time.txt
 rm /home/student/"$container_name"_attacker_ip.txt
 # rm "$container_name"_last_active.txt
-sudo /home/student/destroy_container.sh "$container_name" "$external_ip" 
+/home/student/destroy_container.sh "$container_name" "$external_ip" 
