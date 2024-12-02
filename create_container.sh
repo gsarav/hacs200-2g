@@ -6,14 +6,6 @@ then
   exit 1
 fi
 
-# sed -i '/^$/d' /home/student/free_ip_addr.txt # Remove empty lines in free_ip_addr.txt
-
-# Checking how many IP addresses are free- for each IP address that is free, we will create a new container.
-
-#echo Removing "$ip_addr" from free_ip_addr.txt
-#echo Current free IPs: $(cat "/home/student/free_ip_addr.txt")
-
-  # sed -i "/$ip_addr/d" "/home/student/free_ip_addr.txt"
 # ==== GENERATING RANDOM CONTAINERS ====
 # Generating pseudo random number
 echo Creating a container for "$1"
